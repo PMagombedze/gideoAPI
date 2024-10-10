@@ -1,17 +1,22 @@
 from flask import Flask
 from models import db, bcrypt
 from api import api
-from views import dash
+from views import products
+from config import Config
+from flask_migrate import Migrate
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
-app.register_blueprint(dash, url_prefix='/')
+Migrate(app=app, db=db)
+
+app.register_blueprint(products, url_prefix='/')
 
 with app.app_context():
-    db.create_all()
     db.init_app(app)
+    db.create_all()
     bcrypt.init_app(app)
     api.init_app(app)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=4501)
+    app.run()

@@ -11,8 +11,16 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200), nullable=True)
     price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False)
     image_url = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
         return f'<Product {self.name}>'
+
+    def to_dict(self):
+        return {
+            'id': str(self.id),
+            'name': self.name,
+            'description': self.description,
+            'price': self.price,
+            'image_url': self.image_url
+        }
