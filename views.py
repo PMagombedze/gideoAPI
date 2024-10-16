@@ -2,9 +2,9 @@ from flask import Blueprint, render_template
 
 products = Blueprint('products', __name__)
 
-@products.route('/products')
+@products.route('/cart')
 def dash():
-    return render_template('products.html')
+    return render_template('cart.html')
 
 
 @products.route('/')
