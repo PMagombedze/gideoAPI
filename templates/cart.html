@@ -15,36 +15,97 @@
                 <th>Total</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td><img src="../static/landing.jpg" alt="Item 1" style="width: 50px; height: 50px;"></td>
-                <td>Item 1</td>
-                <td><input class="uk-input uk-form-width-small" type="number" name="" min="0" value="0" id=""></td>
-                <td>$10.00</td>
-                <td>$20.00</td>
-            </tr>
-            <tr>
-                <td><img src="../static/landing.jpg" alt="Item 2" style="width: 50px; height: 50px;"></td>
-                <td>Item 2</td>
-                <td><input class="uk-input uk-form-width-small" type="number" name="" min="0" value="0" id=""></td>
-                <td>$15.00</td>
-                <td>$15.00</td>
-            </tr>
-            <tr>
-                <td><img src="../static/landing.jpg" alt="Item 3" style="width: 50px; height: 50px;"></td>
-                <td>Item 3</td>
-                <td><input class="uk-input uk-form-width-small" type="number" name="" min="0" value="0" id=""></td>
-                <td>$7.00</td>
-                <td>$21.00</td>
-            </tr>
+        <tbody id="cartItemsTableBody">
+            <!-- Cart items will be dynamically inserted here -->
         </tbody>
     </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            let cartItemsTableBody = document.getElementById('cartItemsTableBody');
+
+            cartItems.forEach(item => {
+                let row = document.createElement('tr');
+
+                let imgCell = document.createElement('td');
+                let img = document.createElement('img');
+                img.src = item.img;
+                img.alt = item.name;
+                img.style.width = '50px';
+                img.style.height = '50px';
+                imgCell.appendChild(img);
+
+                let nameCell = document.createElement('td');
+                nameCell.textContent = item.name;
+
+                let quantityCell = document.createElement('td');
+                let quantityInput = document.createElement('input');
+                quantityInput.className = 'uk-input uk-form-width-small';
+                quantityInput.type = 'number';
+                quantityInput.min = '0';
+                quantityInput.value = item.quantity || '1';
+                quantityCell.appendChild(quantityInput);
+
+                let priceCell = document.createElement('td');
+                priceCell.textContent = `${item.price}`;
+
+                let totalCell = document.createElement('td');
+                item.price = parseFloat(item.price.replace("$", ""));
+                totalCell.textContent = `${(item.price * quantityInput.value).toFixed(2)}`;
+
+                quantityInput.addEventListener('input', function () {
+                    totalCell.textContent = `${(item.price * quantityInput.value).toFixed(2)}`;
+                });
+
+                row.appendChild(imgCell);
+                row.appendChild(nameCell);
+                row.appendChild(quantityCell);
+                row.appendChild(priceCell);
+                row.appendChild(totalCell);
+
+                cartItemsTableBody.appendChild(row);
+            });
+        });
+    </script>
     <div class="uk-margin">
-        <h3 style="font-family: Raleway, sans-serif;">Subtotal: $56.00</h3>
+        <h3 style="font-family: Raleway, sans-serif;" id="subtotal">Subtotal: $0.00</h3>
         <button class="uk-button uk-button-secondary uk-text-bold">Checkout</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let subtotalElement = document.getElementById('subtotal');
+            let cartItemsTableBody = document.getElementById('cartItemsTableBody');
+            let subtotal = 0;
+
+            cartItemsTableBody.querySelectorAll('tr').forEach(row => {
+                let totalCell = row.querySelector('td:last-child');
+                subtotal += parseFloat(totalCell.textContent);
+            });
+
+            subtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+
+            cartItemsTableBody.addEventListener('input', function () {
+                subtotal = 0;
+                cartItemsTableBody.querySelectorAll('tr').forEach(row => {
+                    let totalCell = row.querySelector('td:last-child');
+                    subtotal += parseFloat(totalCell.textContent);
+                });
+                subtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+            });
+        });
+    </script>
 </div>
 
 <div style="margin-bottom: 30px;"></div>
 
 {% include 'footer.html' %}
+
+<script>
+    let storedCartCount = localStorage.getItem('cartCount');
+
+    if (storedCartCount) {
+        document.getElementById('cartCount').textContent = storedCartCount;
+    }
+</script>

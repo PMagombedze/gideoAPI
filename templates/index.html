@@ -1,7 +1,6 @@
 {% include 'imports.html' %}
 {% include 'navbar.html' %}
 
-
 <!-- Hero Section -->
 <div class="uk-section uk-background-cover" style="background-image: url('../static/landing.jpg'); height: 100vh;">
 </div>
@@ -24,9 +23,9 @@
                     <img src="../static/ring.avif" alt="">
                 </div>
                 <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
-                    <h3 class="uk-card-title">Matrix ring</h3>
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Matrix ring</h3>
                     <p>$ 149</p>
-                    <button class="uk-text-bold"
+                    <button class="uk-text-bold add-to-cart"
                         style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
                         to cart</button>
                 </div>
@@ -38,9 +37,9 @@
                     <img src="../static/pendant.avif" alt="">
                 </div>
                 <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
-                    <h3 class="uk-card-title">Symbolica pendant</h3>
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Symbolica pendant</h3>
                     <p>$ 80</p>
-                    <button class="uk-text-bold"
+                    <button class="uk-text-bold add-to-cart"
                         style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
                         to cart</button>
                 </div>
@@ -52,9 +51,9 @@
                     <img src="../static/necklace.avif" alt="">
                 </div>
                 <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
-                    <h3 class="uk-card-title">Mesmera choker</h3>
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Mesmera choker</h3>
                     <p>$ 850</p>
-                    <button class="uk-text-bold"
+                    <button class="uk-text-bold add-to-cart"
                         style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
                         to cart</button>
                 </div>
@@ -77,4 +76,30 @@
         }
     </style>
 
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.add-to-cart');
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    let cartCount = document.getElementById('cartCount');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                    localStorage.setItem('cartCount', cartCount.textContent);
+                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const item = {
+                        name: this.parentElement.querySelector('h3').innerText,
+                        price: this.parentElement.querySelector('p').innerText,
+                        img: this.parentElement.parentElement.querySelector('img').src
+                    };
+                    cartItems.push(item);
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                });
+            });
+
+            let storedCartCount = localStorage.getItem('cartCount');
+            if (storedCartCount) {
+                document.getElementById('cartCount').textContent = storedCartCount;
+            }
+        });
+    </script>
+</div>
