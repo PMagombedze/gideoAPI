@@ -28,8 +28,65 @@
 <div class="uk-section uk-background-cover" style="background-image: url('../static/landing.jpg'); height: 100vh;">
 </div>
 <div class="uk-container uk-position-bottom-left uk-light">
-    <h3>Gideon Jewelery Collection</h3>
+    <h3 style="font-family: Raleway, sans-serif;">Gideon Jewelery Collection</h3>
     <p>From a signature jewellery technique to a timeless icon.</p>
-    <button>Shop Gideon</button>
+    <button
+        style="background-color: transparent; padding-bottom: 4px; border: none; border-bottom: 2px solid #fff;color: #fff;font-size: 14pt; font-weight: 500; text-transform: uppercase;cursor: pointer;">Shop
+        Gideon</button>
 </div>
 </div>
+
+<!-- Products Section -->
+<div class="uk-margin uk-margin-large-left uk-margin-large-right">
+    <h2 style="margin-top: 70px;font-family: Raleway, sans-serif;font-weight: 500;">Our Products</h2>
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top">
+                    <img src="../static/earrings.jpg" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left">
+                    <h3 class="uk-card-title">Earrings</h3>
+                    <p>From a signature jewellery technique to a timeless icon.</p>
+                    <button style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Shop Earrings</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top">
+                    <img src="../static/necklace.jpg" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left">
+                    <h3 class="uk-card-title">Necklaces</h3>
+                    <p>From a signature jewellery technique to a timeless icon.</p>
+                    <button style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Shop Necklaces</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top">
+                    <img src="../static/landing.jpg" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
+                    <h3 class="uk-card-title">Rings</h3>
+                    <p>From a signature jewellery technique to a timeless icon.</p>
+                    <button style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Shop Rings</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<style>
+    /*use media queries to make cards responsive*/
+    @media (max-width: 768px) {
+        .uk-child-width-1-3@m {
+            grid-template-columns: 1fr;
+        }
+        
+        #card h3, p, button {
+            margin-left: 1ch;
+        }
+    }
+</style>
