@@ -70,7 +70,7 @@
     </script>
     <div class="uk-margin">
         <h3 style="font-family: Raleway, sans-serif;" id="subtotal">Subtotal: $0.00</h3>
-        <button class="uk-button uk-button-secondary uk-text-bold">Checkout</button>
+        <button onclick="pushNotify();" class="uk-button uk-button-secondary uk-text-bold">Checkout</button>
     </div>
 
     <script>
@@ -107,5 +107,25 @@
 
     if (storedCartCount) {
         document.getElementById('cartCount').textContent = storedCartCount;
+    }
+
+    function pushNotify() {
+        new Notify({
+            status: 'success',
+            title: 'Checkout',
+            text: 'Order checkout successful',
+            effect: 'fade',
+            speed: 300,
+            customClass: null,
+            customIcon: null,
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 3000,
+            gap: 20,
+            distance: 20,
+            type: 'outline',
+            position: 'x-center'
+        })
     }
 </script>
