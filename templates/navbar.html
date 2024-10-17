@@ -15,6 +15,11 @@
     <div class="uk-navbar-right">
         <ul class="uk-navbar-nav">
             <li>
+                <a id="searchIcon">
+                    <span uk-icon="icon: search"></span>
+                </a>
+            </li>
+            <li>
                 <a href="/cart">
                     <span uk-icon="icon: bag"></span>
                     <span class="uk-badge" id="cartCount">0</span>
@@ -23,3 +28,36 @@
         </ul>
     </div>
 </nav>
+
+<!-- Search input field -->
+<div id="searchContainer" style="display: none; text-align: center;">
+    <input type="text" class="uk-input uk-margin-large-bottom" id="searchInput" placeholder="Search for items..."
+        style="width: 50%; padding: 10px; margin-top: 10px;border: 2px solid #000;">
+</div>
+
+<script>
+    /* searchbox */
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchIcon = document.getElementById('searchIcon');
+        const searchContainer = document.getElementById('searchContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        searchIcon.addEventListener('click', function () {
+            searchContainer.style.display = searchContainer.style.display === 'none' ? 'block' : 'none';
+        });
+
+        searchInput.addEventListener('input', function () {
+            const query = searchInput.value.toLowerCase();
+            const items = document.querySelectorAll('.uk-card');
+
+            items.forEach(item => {
+                const itemName = item.querySelector('.uk-card-body').innerText.toLowerCase();
+                if (itemName.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
