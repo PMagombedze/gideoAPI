@@ -60,46 +60,95 @@
             </div>
         </div>
     </div>
+</div>
 
-    <style>
-        /*use media queries to make cards responsive*/
-        @media (max-width: 768px) {
-            .uk-child-width-1-3@m {
-                grid-template-columns: 1fr;
-            }
+<!-- Products Section -->
+<div class="uk-margin uk-margin-large-left uk-margin-large-right">
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top" style="border: 1px solid #eee;">
+                    <img src="../static/millenia.avif" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Millenia open ring</h3>
+                    <p>$ 129</p>
+                    <button class="uk-text-bold add-to-cart"
+                        style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
+                        to cart</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top" style="border: 1px solid #eee;">
+                    <img src="../static/cocktail.avif" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Idyllia cocktail ring</h3>
+                    <p>$ 129</p>
+                    <button class="uk-text-bold add-to-cart"
+                        style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
+                        to cart</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default" style="box-shadow: none;">
+                <div class="uk-card-media-top" style="border: 1px solid #eee;">
+                    <img src="../static/sublima.avif" alt="">
+                </div>
+                <div class="uk-card-body uk-text-left" id="card" style="margin-left: -4ch;">
+                    <h3 class="uk-card-title" style="font-family: Raleway, sans-serif;">Sublima open ring</h3>
+                    <p>$ 129</p>
+                    <button class="uk-text-bold add-to-cart"
+                        style="border: none;border-bottom: 2px solid #000;background-color: transparent;padding-bottom: 4px;cursor: pointer;">Add
+                        to cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-            #card h3,
-            p,
-            button {
-                margin-left: 1ch;
-            }
+<style>
+    /*use media queries to make cards responsive*/
+    @media (max-width: 768px) {
+        .uk-child-width-1-3@m {
+            grid-template-columns: 1fr;
         }
-    </style>
 
-    {% include 'footer.html' %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buttons = document.querySelectorAll('.add-to-cart');
-            buttons.forEach(button => {
-                button.addEventListener('click', function () {
-                    let cartCount = document.getElementById('cartCount');
-                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
-                    localStorage.setItem('cartCount', cartCount.textContent);
-                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-                    const item = {
-                        name: this.parentElement.querySelector('h3').innerText,
-                        price: this.parentElement.querySelector('p').innerText,
-                        img: this.parentElement.parentElement.querySelector('img').src
-                    };
-                    cartItems.push(item);
-                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-                });
+        #card h3,
+        p,
+        button {
+            margin-left: 1ch;
+        }
+    }
+</style>
+
+{% include 'footer.html' %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll('.add-to-cart');
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                let cartCount = document.getElementById('cartCount');
+                cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                localStorage.setItem('cartCount', cartCount.textContent);
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const item = {
+                    name: this.parentElement.querySelector('h3').innerText,
+                    price: this.parentElement.querySelector('p').innerText,
+                    img: this.parentElement.parentElement.querySelector('img').src
+                };
+                cartItems.push(item);
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
             });
-
-            let storedCartCount = localStorage.getItem('cartCount');
-            if (storedCartCount) {
-                document.getElementById('cartCount').textContent = storedCartCount;
-            }
         });
-    </script>
+
+        let storedCartCount = localStorage.getItem('cartCount');
+        if (storedCartCount) {
+            document.getElementById('cartCount').textContent = storedCartCount;
+        }
+    });
+</script>
 </div>
