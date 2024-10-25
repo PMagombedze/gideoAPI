@@ -131,6 +131,23 @@
         const buttons = document.querySelectorAll('.add-to-cart');
         buttons.forEach(button => {
             button.addEventListener('click', function () {
+                new Notify({
+                    status: 'success',
+                    title: 'Add to cart',
+                    text: 'Item added to cart',
+                    effect: 'fade',
+                    speed: 300,
+                    customClass: null,
+                    customIcon: null,
+                    showIcon: true,
+                    showCloseButton: true,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    gap: 20,
+                    distance: 20,
+                    type: 'outline',
+                    position: 'x-center'
+                });
                 let cartCount = document.getElementById('cartCount');
                 cartCount.textContent = parseInt(cartCount.textContent) + 1;
                 localStorage.setItem('cartCount', cartCount.textContent);

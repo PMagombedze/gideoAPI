@@ -110,6 +110,7 @@
     }
 
     function pushNotify() {
+        localStorage.clear();
         new Notify({
             status: 'success',
             title: 'Checkout',
@@ -126,6 +127,9 @@
             distance: 20,
             type: 'outline',
             position: 'x-center'
-        })
+        });
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 1000);
     }
 </script>
